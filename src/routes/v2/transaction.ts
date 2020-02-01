@@ -25,7 +25,7 @@ const processInputs = (tx: TransactionInterface): any => {
           const address: string = vin.addr
           if (address) {
             vin.legacyAddress = bitbox.Address.toLegacyAddress(address)
-            vin.cashAddress = bitbox.Address.toCashAddress(address)
+            vin.cashAddress = bitbox.Address.toLegacyAddress(address)
             delete vin.addr
           }
           delete vin.valueSat
@@ -46,10 +46,10 @@ const processInputs = (tx: TransactionInterface): any => {
           if (vout.scriptPubKey.addresses) {
             const cashAddrs: string[] = []
             vout.scriptPubKey.addresses.forEach((addr: any) => {
-              const cashAddr = bitbox.Address.toCashAddress(addr)
+              const cashAddr = bitbox.Address.toLegacyAddress(addr)
               cashAddrs.push(cashAddr)
             })
-            vout.scriptPubKey.cashAddrs = cashAddrs
+            vout.scriptPubKey.legacyAddress = cashAddrs
           }
         }
       }

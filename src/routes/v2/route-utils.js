@@ -57,7 +57,7 @@ function validateNetwork(addr) {
 
     // Convert the user-provided address to a cashaddress, for easy detection
     // of the intended network.
-    const cashAddr = Utils.toCashAddress(addr)
+    const cashAddr = Utils.toLegacyAddress(addr)
 
     // Return true if the network and address both match testnet
     const addrIsTest = bitbox.Address.isTestnetAddress(cashAddr)

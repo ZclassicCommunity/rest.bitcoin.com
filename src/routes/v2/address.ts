@@ -57,9 +57,9 @@ async function detailsFromInsight(
   try {
     let addr: string
     if (
-      process.env.BITCOINCOM_BASEURL === "https://bch-insight.bitpay.com/api/"
+      process.env.BITCOINCOM_BASEURL === "https://insight.zslp.org/api/tx"
     ) {
-      addr = bitbox.Address.toCashAddress(thisAddress)
+      addr = bitbox.Address.toLegacyAddress(thisAddress)
     } else {
       addr = bitbox.Address.toLegacyAddress(thisAddress)
     }
@@ -81,8 +81,8 @@ async function detailsFromInsight(
 
     // Append different address formats to the return data.
     retData.legacyAddress = bitbox.Address.toLegacyAddress(retData.addrStr)
-    retData.cashAddress = bitbox.Address.toCashAddress(retData.addrStr)
-    retData.slpAddress = Utils.toSlpAddress(retData.cashAddress)
+    // retData.cashAddress = bitbox.Address.toCashAddress(retData.addrStr)
+    retData.slpAddress = Utils.toSlpAddress(retData.legacyAddress)
     delete retData.addrStr
 
     // Append pagination information to the return data.
@@ -141,7 +141,7 @@ async function detailsSingle(
     // Prevent a common user error. Ensure they are using the correct network address.
     const networkIsValid: boolean = routeUtils.validateNetwork(
       Utils.toLegacyAddress(address)
-    )
+      )
     if (!networkIsValid) {
       res.status(400)
       return res.json({
@@ -219,7 +219,7 @@ async function detailsBulk(
 
       // Prevent a common user error. Ensure they are using the correct network address.
       const networkIsValid: boolean = routeUtils.validateNetwork(
-        Utils.toCashAddress(thisAddress)
+        Utils.toLegacyAddress(this.Address)
       )
       if (!networkIsValid) {
         res.status(400)
@@ -266,9 +266,9 @@ async function utxoFromInsight(
   try {
     let addr: string
     if (
-      process.env.BITCOINCOM_BASEURL === "https://bch-insight.bitpay.com/api/"
+      process.env.BITCOINCOM_BASEURL === "http://insight.zslp.org/api/"
     ) {
-      addr = Utils.toCashAddress(thisAddress)
+      addr = Utils.toLegacyAddress(thisAddress)
     } else {
       addr = Utils.toLegacyAddress(thisAddress)
     }
@@ -294,8 +294,8 @@ async function utxoFromInsight(
       retData.asm = bitbox.Script.toASM(scriptSigBuffer)
     }
     retData.legacyAddress = Utils.toLegacyAddress(thisAddress)
-    retData.cashAddress = Utils.toCashAddress(thisAddress)
-    retData.slpAddress = Utils.toSlpAddress(retData.cashAddress)
+    // retData.cashAddress = Utils.toCashAddress(thisAddress)
+    retData.slpAddress = Utils.toSlpAddress(retData.legacyAddress)
     retData.utxos = response.data.map(
       (utxo: UTXOsInterface): UTXOsInterface => {
         delete utxo.address
@@ -418,7 +418,7 @@ async function utxoBulk(
 
       // Prevent a common user error. Ensure they are using the correct network address.
       const networkIsValid: boolean = routeUtils.validateNetwork(
-        Utils.toCashAddress(thisAddress)
+        Utils.toLegacyAddress(thisAddress)
       )
       if (!networkIsValid) {
         res.status(400)
@@ -500,7 +500,7 @@ async function unconfirmedSingle(
 
     // Prevent a common user error. Ensure they are using the correct network address.
     const networkIsValid: boolean = routeUtils.validateNetwork(
-      Utils.toCashAddress(address)
+      Utils.toLegacyAddress(address)
     )
     if (!networkIsValid) {
       res.status(400)
@@ -586,7 +586,7 @@ async function unconfirmedBulk(
 
       // Prevent a common user error. Ensure they are using the correct network address.
       const networkIsValid: boolean = routeUtils.validateNetwork(
-        Utils.toCashAddress(thisAddress)
+        Utils.toLegacyAddress(thisAddress)
       )
       if (!networkIsValid) {
         res.status(400)
@@ -657,7 +657,7 @@ async function transactionsFromInsight(
     // Append different address formats to the return data.
     const retData: TransactionsInterface = response.data
     retData.legacyAddress = bitbox.Address.toLegacyAddress(thisAddress)
-    retData.cashAddress = bitbox.Address.toCashAddress(thisAddress)
+    // retData.cashAddress = bitbox.Address.toCashAddress(thisAddress)
     retData.currentPage = currentPage
 
     return retData
@@ -795,7 +795,7 @@ async function transactionsSingle(
 
     // Prevent a common user error. Ensure they are using the correct network address.
     const networkIsValid: boolean = routeUtils.validateNetwork(
-      Utils.toCashAddress(address)
+      Utils.toLegacyAddress(address)
     )
     if (!networkIsValid) {
       res.status(400)

@@ -38,9 +38,9 @@ util.inspect.defaultOptions = { depth: 5 }
 
 // Setup REST and TREST URLs used by slpjs
 // Dev note: this allows for unit tests to mock the URL.
-if (!process.env.REST_URL) process.env.REST_URL = `https://rest.bitcoin.com/v2/`
+if (!process.env.REST_URL) process.env.REST_URL = `https://rest.zslp.org/v2/`
 if (!process.env.TREST_URL)
-  process.env.TREST_URL = `https://trest.bitcoin.com/v2/`
+  process.env.TREST_URL = `https://trest.zslp.org/v2/`
 
 // Determine the Access password for a private instance of SLPDB.
 // https://gist.github.com/christroutner/fc717ca704dec3dded8b52fae387eab2
