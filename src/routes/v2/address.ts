@@ -57,7 +57,7 @@ async function detailsFromInsight(
   try {
     let addr: string
     if (
-      process.env.BITCOINCOM_BASEURL === "https://insight.zslp.org/api/tx"
+      process.env.BITCOINCOM_BASEURL === "https://insight.zslp.org/api/"
     ) {
       addr = bitbox.Address.toLegacyAddress(thisAddress)
     } else {
