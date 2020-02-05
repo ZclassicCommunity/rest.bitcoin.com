@@ -513,7 +513,7 @@ async function balancesForAddressSingle(
 
     // Ensure the input is a valid BCH address.
     try {
-      utils.toCashAddress(address)
+      utils.toLegacyAddress(address)
     } catch (err) {
       res.status(400)
       return res.json({
@@ -522,7 +522,7 @@ async function balancesForAddressSingle(
     }
 
     // Prevent a common user error. Ensure they are using the correct network address.
-    const cashAddr: string = utils.toCashAddress(address)
+    const cashAddr: string = utils.toLegacyAddress(address)
     const networkIsValid: boolean = routeUtils.validateNetwork(cashAddr)
     if (!networkIsValid) {
       res.status(400)
@@ -679,7 +679,7 @@ async function balancesForAddressBulk(
 
       // Ensure the input is a valid BCH address.
       try {
-        utils.toCashAddress(address)
+        utils.toLegacyAddress(address)
       } catch (err) {
         res.status(400)
         return res.json({
@@ -688,7 +688,7 @@ async function balancesForAddressBulk(
       }
 
       // Prevent a common user error. Ensure they are using the correct network address.
-      const cashAddr: string = utils.toCashAddress(address)
+      const cashAddr: string = utils.toLegacyAddress(address)
       const networkIsValid: boolean = routeUtils.validateNetwork(cashAddr)
       if (!networkIsValid) {
         res.status(400)
@@ -1013,7 +1013,7 @@ async function balancesForAddressByTokenIDSingle(
 
     // Ensure the input is a valid BCH address.
     try {
-      utils.toCashAddress(address)
+      utils.toLegacyAddress(address)
     } catch (err) {
       res.status(400)
       return res.json({
@@ -1022,7 +1022,7 @@ async function balancesForAddressByTokenIDSingle(
     }
 
     // Prevent a common user error. Ensure they are using the correct network address.
-    const cashAddr: string = utils.toCashAddress(address)
+    const cashAddr: string = utils.toLegacyAddress(address)
     const networkIsValid: boolean = routeUtils.validateNetwork(cashAddr)
     if (!networkIsValid) {
       res.status(400)
@@ -1062,7 +1062,7 @@ async function balancesForAddressByTokenIDSingle(
     // Get data from SLPDB.
     const tokenRes: AxiosResponse<any> = await axios.get(url, options)
     let resVal: BalanceForAddressByTokenId = {
-      cashAddress: utils.toCashAddress(slpAddr),
+      cashAddress: utils.toLegacyAddress(slpAddr),
       legacyAddress: utils.toLegacyAddress(slpAddr),
       slpAddress: slpAddr,
       tokenId: tokenId,
@@ -1073,7 +1073,7 @@ async function balancesForAddressByTokenIDSingle(
       tokenRes.data.a.forEach((token: any): any => {
         if (token.tokenDetails.tokenIdHex === tokenId) {
           resVal = {
-            cashAddress: utils.toCashAddress(slpAddr),
+            cashAddress: utils.toLegacyAddress(slpAddr),
             legacyAddress: utils.toLegacyAddress(slpAddr),
             slpAddress: slpAddr,
             tokenId: token.tokenDetails.tokenIdHex,
@@ -1084,7 +1084,7 @@ async function balancesForAddressByTokenIDSingle(
       })
     } else {
       resVal = {
-        cashAddress: utils.toCashAddress(slpAddr),
+        cashAddress: utils.toLegacyAddress(slpAddr),
         legacyAddress: utils.toLegacyAddress(slpAddr),
         slpAddress: slpAddr,
         tokenId: tokenId,
@@ -1131,7 +1131,7 @@ async function balancesForAddressByTokenIDBulk(
 
       // Ensure the input is a valid BCH address.
       try {
-        utils.toCashAddress(r.address)
+        utils.toLegacyAddress(r.address)
       } catch (err) {
         res.status(400)
         return res.json({
@@ -1140,7 +1140,7 @@ async function balancesForAddressByTokenIDBulk(
       }
 
       // Prevent a common user error. Ensure they are using the correct network address.
-      const cashAddr: string = utils.toCashAddress(r.address)
+      const cashAddr: string = utils.toLegacyAddress(r.address)
       const networkIsValid: boolean = routeUtils.validateNetwork(cashAddr)
       if (!networkIsValid) {
         res.status(400)
@@ -1184,7 +1184,7 @@ async function balancesForAddressByTokenIDBulk(
         const tokenRes: AxiosResponse<any> = await axios.get(url, options)
 
         let resVal: BalanceForAddressByTokenId = {
-          cashAddress: utils.toCashAddress(slpAddr),
+          cashAddress: utils.toLegacyAddress(slpAddr),
           legacyAddress: utils.toLegacyAddress(slpAddr),
           slpAddress: slpAddr,
           tokenId: data.tokenId,
@@ -1196,7 +1196,7 @@ async function balancesForAddressByTokenIDBulk(
             async (token: any): Promise<any> => {
               if (token.tokenDetails.tokenIdHex === data.tokenId) {
                 resVal = {
-                  cashAddress: utils.toCashAddress(data.address),
+                  cashAddress: utils.toLegacyAddress(data.address),
                   legacyAddress: utils.toLegacyAddress(data.address),
                   slpAddress: data.address,
                   tokenId: token.tokenDetails.tokenIdHex,
@@ -1208,7 +1208,7 @@ async function balancesForAddressByTokenIDBulk(
           )
         } else {
           resVal = {
-            cashAddress: utils.toCashAddress(data.address),
+            cashAddress: utils.toLegacyAddress(data.address),
             legacyAddress: utils.toLegacyAddress(data.address),
             slpAddress: data.address,
             tokenId: data.tokenId,
@@ -2377,7 +2377,7 @@ async function txsTokenIdAddressBulk(
 
       // Ensure the input is a valid BCH address.
       try {
-        utils.toCashAddress(r.address)
+        utils.toLegacyAddress(r.address)
       } catch (err) {
         res.status(400)
         return res.json({
@@ -2386,7 +2386,7 @@ async function txsTokenIdAddressBulk(
       }
 
       // Prevent a common user error. Ensure they are using the correct network address.
-      const cashAddr: string = utils.toCashAddress(r.address)
+      const cashAddr: string = utils.toLegacyAddress(r.address)
       const networkIsValid: boolean = routeUtils.validateNetwork(cashAddr)
       if (!networkIsValid) {
         res.status(400)
