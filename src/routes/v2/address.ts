@@ -219,7 +219,7 @@ async function detailsBulk(
 
       // Prevent a common user error. Ensure they are using the correct network address.
       const networkIsValid: boolean = routeUtils.validateNetwork(
-        Utils.toLegacyAddress(this.Address)
+        Utils.toLegacyAddress(thisAddress)
       )
       if (!networkIsValid) {
         res.status(400)
