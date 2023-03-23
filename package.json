@@ -27,7 +27,7 @@
     "bitbox-sdk": "ZSLP/bitbox-sdk#731825c830aab1006b482efa6ead63c12c98eafa",
     "bitcoincash-zmq-decoder": "ZSLP/bitcoincash-zmq-decoder#210ae35137ea45a92d68318d70e58bf6f25c055f",
     "body-parser": "^1.18.3",
-    "cashaccounts": "ZSLP/cashaccounts#1d3d5dfd1e79b9d85e55c4ed53cddabcf89e3641",
+    "cashaccounts": "ZclassicCommunity/cashaccounts#33f9ea1f5cf5efcf6d16993cdbf7750c6e8ce0e2",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.3",
     "debug": "~2.6.3",
